@@ -5,7 +5,7 @@ function generateSelectTag(){
     $query = "select id, name from QReaff.chapters";
     $result = $conn->query($query);
 
-    echo "<select id=\"chapterSelect\" name=\"chapterSelect\">\n";
+    echo "<select id=\"chapterSelect\" name=\"chapterId\">\n";
     $i = 0;
     while($row = $result->fetch_assoc()){
         echo "<option ";
@@ -13,7 +13,7 @@ function generateSelectTag(){
         echo $row["name"];
         echo "</option>\n";
         i++;
-    }
+    } $result->free();
     echo "\n</select>";
     echo "<p id=\"selectMax\" hidden>".$i."</p>";
 }
@@ -69,7 +69,7 @@ function generateSelectTag(){
              return false;
              }
 
-         //check the datesi
+         //check the dates
          s = document.getElementById("startDate");
          e = document.getElementById("endDate");
          startD = new Date(s.value);
@@ -80,6 +80,9 @@ function generateSelectTag(){
              highlight(s);
              highlight(e);
              return false;
+         } else { //convert values to ISO for proper handling on server side
+             s.value = startD.toISOString();
+             e.value = endD.toISOString();
          }
 
          //if it gets this far, then everything is gucci
