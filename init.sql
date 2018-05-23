@@ -5,6 +5,7 @@ GRANT ALL ON QReaff.* to 'QReaff'@'localhost';
 
 CREATE TABLE QReaff.chapters (
        id int NOT NULL AUTO_INCREMENT,
+       name varchar NOT NULL,
        latitude float NOT NULL,
        longitude float NOT NULL,
        PRIMARY KEY (id)
